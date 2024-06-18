@@ -9,10 +9,6 @@ import (
 
 const addr = ":50000"
 
-type Server struct {
-	pb.GreetServiceServer
-}
-
 func main() {
 	listen, err := net.Listen("tcp", addr)
 	if err != nil {
@@ -22,6 +18,8 @@ func main() {
 	log.Printf("Listening  on %s\n", addr)
 
 	s := grpc.NewServer()
+	pb.RegisterGreetServiceServer(s, &Server{})
+
 	if err = s.Serve(listen); err != nil {
 		log.Fatalf("Failed to server %v\n", err)
 	}
