@@ -4,11 +4,10 @@ package calculator;
 
 option go_package = "github.com/saeedjhn/go-grpc/calculator/goproto";
 
-message SumRequest {
-  int32 first_num = 1;
-  int32 second_num = 2;
+message PrimesRequest {
+  int32 n = 1;
 }
 
-message SumResponse {
+message PrimesResponse {
   int32 result = 1;
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/calculator/proto"
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"google.golang.org/grpc"
 	"log"
 	"net"

@@ -2,15 +2,15 @@ syntax = "proto3";
 
 package calculator;
 
-option go_package = "github.com/saeedjhn/go-grpc/calculator/proto";
+option go_package = "github.com/saeedjhn/go-grpc/calculator/goproto";
 
 import "sum.proto";
-import "mines.proto";
+import "sub.proto";
+import "primes.proto";
 
 service CalculatorService {
-  rpc Sum(SumRequest) returns (SumResponse) {}
-  rpc Mines(MinesRequest) returns (MinesResponse) {
-
-  }
+  rpc Sum(SumRequest) returns (SumResponse) {} // Unary
+  rpc Sub(SubRequest) returns (SubResponse) {} // Unary
+  rpc Primes(PrimesRequest) returns (stream PrimesResponse) {} // Server streaming
 }
 

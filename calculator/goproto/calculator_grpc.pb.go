@@ -4,7 +4,7 @@
 // - protoc             v3.12.4
 // source: calculator.proto
 
-package proto
+package goproto
 
 import (
 	context "context"
@@ -23,7 +23,8 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CalculatorServiceClient interface {
 	Sum(ctx context.Context, in *SumRequest, opts ...grpc.CallOption) (*SumResponse, error)
-	Mines(ctx context.Context, in *MinesRequest, opts ...grpc.CallOption) (*MinesResponse, error)
+	Sub(ctx context.Context, in *SubRequest, opts ...grpc.CallOption) (*SubResponse, error)
+	Primes(ctx context.Context, in *PrimesRequest, opts ...grpc.CallOption) (CalculatorService_PrimesClient, error)
 }
 
 type calculatorServiceClient struct {
@@ -43,13 +44,45 @@ func (c *calculatorServiceClient) Sum(ctx context.Context, in *SumRequest, opts 
 	return out, nil
 }
 
-func (c *calculatorServiceClient) Mines(ctx context.Context, in *MinesRequest, opts ...grpc.CallOption) (*MinesResponse, error) {
-	out := new(MinesResponse)
-	err := c.cc.Invoke(ctx, "/calculator.CalculatorService/Mines", in, out, opts...)
+func (c *calculatorServiceClient) Sub(ctx context.Context, in *SubRequest, opts ...grpc.CallOption) (*SubResponse, error) {
+	out := new(SubResponse)
+	err := c.cc.Invoke(ctx, "/calculator.CalculatorService/Sub", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
+}
+
+func (c *calculatorServiceClient) Primes(ctx context.Context, in *PrimesRequest, opts ...grpc.CallOption) (CalculatorService_PrimesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &CalculatorService_ServiceDesc.Streams[0], "/calculator.CalculatorService/Primes", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &calculatorServicePrimesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type CalculatorService_PrimesClient interface {
+	Recv() (*PrimesResponse, error)
+	grpc.ClientStream
+}
+
+type calculatorServicePrimesClient struct {
+	grpc.ClientStream
+}
+
+func (x *calculatorServicePrimesClient) Recv() (*PrimesResponse, error) {
+	m := new(PrimesResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // CalculatorServiceServer is the server API for CalculatorService service.
@@ -57,7 +90,8 @@ func (c *calculatorServiceClient) Mines(ctx context.Context, in *MinesRequest, o
 // for forward compatibility
 type CalculatorServiceServer interface {
 	Sum(context.Context, *SumRequest) (*SumResponse, error)
-	Mines(context.Context, *MinesRequest) (*MinesResponse, error)
+	Sub(context.Context, *SubRequest) (*SubResponse, error)
+	Primes(*PrimesRequest, CalculatorService_PrimesServer) error
 	mustEmbedUnimplementedCalculatorServiceServer()
 }
 
@@ -68,8 +102,11 @@ type UnimplementedCalculatorServiceServer struct {
 func (UnimplementedCalculatorServiceServer) Sum(context.Context, *SumRequest) (*SumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Sum not implemented")
 }
-func (UnimplementedCalculatorServiceServer) Mines(context.Context, *MinesRequest) (*MinesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Mines not implemented")
+func (UnimplementedCalculatorServiceServer) Sub(context.Context, *SubRequest) (*SubResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Sub not implemented")
+}
+func (UnimplementedCalculatorServiceServer) Primes(*PrimesRequest, CalculatorService_PrimesServer) error {
+	return status.Errorf(codes.Unimplemented, "method Primes not implemented")
 }
 func (UnimplementedCalculatorServiceServer) mustEmbedUnimplementedCalculatorServiceServer() {}
 
@@ -102,22 +139,43 @@ func _CalculatorService_Sum_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CalculatorService_Mines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MinesRequest)
+func _CalculatorService_Sub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CalculatorServiceServer).Mines(ctx, in)
+		return srv.(CalculatorServiceServer).Sub(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/calculator.CalculatorService/Mines",
+		FullMethod: "/calculator.CalculatorService/Sub",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CalculatorServiceServer).Mines(ctx, req.(*MinesRequest))
+		return srv.(CalculatorServiceServer).Sub(ctx, req.(*SubRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _CalculatorService_Primes_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(PrimesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CalculatorServiceServer).Primes(m, &calculatorServicePrimesServer{stream})
+}
+
+type CalculatorService_PrimesServer interface {
+	Send(*PrimesResponse) error
+	grpc.ServerStream
+}
+
+type calculatorServicePrimesServer struct {
+	grpc.ServerStream
+}
+
+func (x *calculatorServicePrimesServer) Send(m *PrimesResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // CalculatorService_ServiceDesc is the grpc.ServiceDesc for CalculatorService service.
@@ -132,10 +190,16 @@ var CalculatorService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _CalculatorService_Sum_Handler,
 		},
 		{
-			MethodName: "Mines",
-			Handler:    _CalculatorService_Mines_Handler,
+			MethodName: "Sub",
+			Handler:    _CalculatorService_Sub_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "Primes",
+			Handler:       _CalculatorService_Primes_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "calculator.proto",
 }

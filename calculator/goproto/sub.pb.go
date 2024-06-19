@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.12.4
-// source: sum.proto
+// source: sub.proto
 
-package proto
+package goproto
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SumRequest struct {
+type SubRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -29,23 +29,23 @@ type SumRequest struct {
 	SecondNum int32 `protobuf:"varint,2,opt,name=second_num,json=secondNum,proto3" json:"second_num,omitempty"`
 }
 
-func (x *SumRequest) Reset() {
-	*x = SumRequest{}
+func (x *SubRequest) Reset() {
+	*x = SubRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sum_proto_msgTypes[0]
+		mi := &file_sub_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *SumRequest) String() string {
+func (x *SubRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SumRequest) ProtoMessage() {}
+func (*SubRequest) ProtoMessage() {}
 
-func (x *SumRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_sum_proto_msgTypes[0]
+func (x *SubRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sub_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,26 +56,26 @@ func (x *SumRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SumRequest.ProtoReflect.Descriptor instead.
-func (*SumRequest) Descriptor() ([]byte, []int) {
-	return file_sum_proto_rawDescGZIP(), []int{0}
+// Deprecated: Use SubRequest.ProtoReflect.Descriptor instead.
+func (*SubRequest) Descriptor() ([]byte, []int) {
+	return file_sub_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SumRequest) GetFirstNum() int32 {
+func (x *SubRequest) GetFirstNum() int32 {
 	if x != nil {
 		return x.FirstNum
 	}
 	return 0
 }
 
-func (x *SumRequest) GetSecondNum() int32 {
+func (x *SubRequest) GetSecondNum() int32 {
 	if x != nil {
 		return x.SecondNum
 	}
 	return 0
 }
 
-type SumResponse struct {
+type SubResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -83,23 +83,23 @@ type SumResponse struct {
 	Result int32 `protobuf:"varint,1,opt,name=result,proto3" json:"result,omitempty"`
 }
 
-func (x *SumResponse) Reset() {
-	*x = SumResponse{}
+func (x *SubResponse) Reset() {
+	*x = SubResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sum_proto_msgTypes[1]
+		mi := &file_sub_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *SumResponse) String() string {
+func (x *SubResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SumResponse) ProtoMessage() {}
+func (*SubResponse) ProtoMessage() {}
 
-func (x *SumResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sum_proto_msgTypes[1]
+func (x *SubResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sub_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -110,53 +110,54 @@ func (x *SumResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SumResponse.ProtoReflect.Descriptor instead.
-func (*SumResponse) Descriptor() ([]byte, []int) {
-	return file_sum_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use SubResponse.ProtoReflect.Descriptor instead.
+func (*SubResponse) Descriptor() ([]byte, []int) {
+	return file_sub_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SumResponse) GetResult() int32 {
+func (x *SubResponse) GetResult() int32 {
 	if x != nil {
 		return x.Result
 	}
 	return 0
 }
 
-var File_sum_proto protoreflect.FileDescriptor
+var File_sub_proto protoreflect.FileDescriptor
 
-var file_sum_proto_rawDesc = []byte{
-	0x0a, 0x09, 0x73, 0x75, 0x6d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x63, 0x61, 0x6c,
-	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x48, 0x0a, 0x0a, 0x53, 0x75, 0x6d, 0x52, 0x65,
+var file_sub_proto_rawDesc = []byte{
+	0x0a, 0x09, 0x73, 0x75, 0x62, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0a, 0x63, 0x61, 0x6c,
+	0x63, 0x75, 0x6c, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x48, 0x0a, 0x0a, 0x53, 0x75, 0x62, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x6e,
 	0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x66, 0x69, 0x72, 0x73, 0x74, 0x4e,
 	0x75, 0x6d, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x5f, 0x6e, 0x75, 0x6d,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x4e, 0x75,
-	0x6d, 0x22, 0x25, 0x0a, 0x0b, 0x53, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x6d, 0x22, 0x25, 0x0a, 0x0b, 0x53, 0x75, 0x62, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
-	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68,
+	0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x30, 0x5a, 0x2e, 0x67, 0x69, 0x74, 0x68,
 	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x61, 0x65, 0x65, 0x64, 0x6a, 0x68, 0x6e, 0x2f,
 	0x67, 0x6f, 0x2d, 0x67, 0x72, 0x70, 0x63, 0x2f, 0x63, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74,
-	0x6f, 0x72, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x72, 0x2f, 0x67, 0x6f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
-	file_sum_proto_rawDescOnce sync.Once
-	file_sum_proto_rawDescData = file_sum_proto_rawDesc
+	file_sub_proto_rawDescOnce sync.Once
+	file_sub_proto_rawDescData = file_sub_proto_rawDesc
 )
 
-func file_sum_proto_rawDescGZIP() []byte {
-	file_sum_proto_rawDescOnce.Do(func() {
-		file_sum_proto_rawDescData = protoimpl.X.CompressGZIP(file_sum_proto_rawDescData)
+func file_sub_proto_rawDescGZIP() []byte {
+	file_sub_proto_rawDescOnce.Do(func() {
+		file_sub_proto_rawDescData = protoimpl.X.CompressGZIP(file_sub_proto_rawDescData)
 	})
-	return file_sum_proto_rawDescData
+	return file_sub_proto_rawDescData
 }
 
-var file_sum_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_sum_proto_goTypes = []interface{}{
-	(*SumRequest)(nil),  // 0: calculator.SumRequest
-	(*SumResponse)(nil), // 1: calculator.SumResponse
+var file_sub_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_sub_proto_goTypes = []interface{}{
+	(*SubRequest)(nil),  // 0: calculator.SubRequest
+	(*SubResponse)(nil), // 1: calculator.SubResponse
 }
-var file_sum_proto_depIdxs = []int32{
+var file_sub_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -164,14 +165,14 @@ var file_sum_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_sum_proto_init() }
-func file_sum_proto_init() {
-	if File_sum_proto != nil {
+func init() { file_sub_proto_init() }
+func file_sub_proto_init() {
+	if File_sub_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_sum_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SumRequest); i {
+		file_sub_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SubRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -182,8 +183,8 @@ func file_sum_proto_init() {
 				return nil
 			}
 		}
-		file_sum_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SumResponse); i {
+		file_sub_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SubResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -199,18 +200,18 @@ func file_sum_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_sum_proto_rawDesc,
+			RawDescriptor: file_sub_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_sum_proto_goTypes,
-		DependencyIndexes: file_sum_proto_depIdxs,
-		MessageInfos:      file_sum_proto_msgTypes,
+		GoTypes:           file_sub_proto_goTypes,
+		DependencyIndexes: file_sub_proto_depIdxs,
+		MessageInfos:      file_sub_proto_msgTypes,
 	}.Build()
-	File_sum_proto = out.File
-	file_sum_proto_rawDesc = nil
-	file_sum_proto_goTypes = nil
-	file_sum_proto_depIdxs = nil
+	File_sub_proto = out.File
+	file_sub_proto_rawDesc = nil
+	file_sub_proto_goTypes = nil
+	file_sub_proto_depIdxs = nil
 }

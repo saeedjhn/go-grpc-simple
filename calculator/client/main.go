@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/calculator/proto"
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -18,7 +18,8 @@ func main() {
 	}
 	log.Printf("Connection is successful on %s\n", addr)
 
-	client := pb.NewCalculatorServiceClient(conn)
-	doSum(client)
-	doMines(client)
+	c := pb.NewCalculatorServiceClient(conn)
+	//doSum(c)
+	//doSub(c)
+	doPrimes(c)
 }
