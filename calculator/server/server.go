@@ -17,3 +17,9 @@ func (s *Server) Sum(ctx context.Context, in *pb.SumRequest) (*pb.SumResponse, e
 		Result: in.GetFirstNum() + in.GetSecondNum(),
 	}, nil
 }
+
+func (s *Server) Mines(ctx context.Context, in *pb.MinesRequest) (*pb.MinesResponse, error) {
+	return &pb.MinesResponse{
+		Result: in.GetFirstNum() - in.GetSecondNum(),
+	}, nil
+}

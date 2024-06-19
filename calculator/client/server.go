@@ -20,3 +20,18 @@ func doSum(c pb.CalculatorServiceClient) {
 
 	log.Printf("Sum is: %d\n", res.Result)
 }
+
+func doMines(c pb.CalculatorServiceClient) {
+	log.Println("doMines was invoked")
+
+	res, err := c.Mines(context.Background(), &pb.MinesRequest{
+		FirstNum:  8,
+		SecondNum: 5,
+	})
+
+	if err != nil {
+		log.Fatalf("Could not mines %v\n", err)
+	}
+
+	log.Printf("Mines is: %d\n", res.Result)
+}

@@ -20,4 +20,5 @@ func main() {
 
 	client := pb.NewCalculatorServiceClient(conn)
 	doSum(client)
+	doMines(client)
 }
