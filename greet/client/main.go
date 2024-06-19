@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/greet/proto"
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
@@ -18,6 +18,7 @@ func main() {
 	}
 	log.Printf("Connection is successful on %s\n", addr)
 
-	client := pb.NewGreetServiceClient(conn)
-	doGreet(client)
+	c := pb.NewGreetServiceClient(conn)
+	//doGreet(c)
+	doGreetManyTimes(c)
 }

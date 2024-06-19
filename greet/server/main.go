@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/greet/proto"
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
