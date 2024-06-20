@@ -9,6 +9,7 @@ import "sub.proto";
 import "primes.proto";
 import "avg.proto";
 import "max.proto";
+import "sqrt.proto";
 
 service CalculatorService {
   rpc Sum(SumRequest) returns (SumResponse) {} // Unary
@@ -16,5 +17,6 @@ service CalculatorService {
   rpc Primes(PrimesRequest) returns (stream PrimesResponse) {} // Server streaming
   rpc Avg(stream AvgRequest) returns (AvgResponse) {} // Client streaming
   rpc Max(stream MaxRequest) returns (stream MaxResponse) {} // Bi-directional
+  rpc Sqrt(SqrtRequest) returns (SqrtResponse) {} // Unary with Error handle
 }
 

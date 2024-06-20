@@ -23,5 +23,6 @@ func main() {
 	//doSub(c)
 	//doPrimes(c)
 	//doAvg(c)
-	doMax(c)
+	//doMax(c)
+	doSqrt(c, 10)
 }
