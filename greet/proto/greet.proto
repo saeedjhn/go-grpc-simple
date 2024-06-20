@@ -19,4 +19,5 @@ service GreetService {
   rpc GreetManyTimes (GreetRequest) returns (stream GreetResponse) {}; // Server streaming
   rpc LongGreet (stream GreetRequest) returns (GreetResponse) {}; // Client streaming
   rpc GreetEveryOnce (stream GreetRequest) returns (stream GreetResponse) {}; // Bi-directional streaming
+  rpc GreetWithDeadline(GreetRequest) returns (GreetResponse) {}; // Deadline
 }
