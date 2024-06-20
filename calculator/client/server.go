@@ -5,6 +5,7 @@ import (
 	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"io"
 	"log"
+	"time"
 )
 
 func doSum(c pb.CalculatorServiceClient) {
@@ -60,4 +61,76 @@ func doPrimes(c pb.CalculatorServiceClient) {
 
 		log.Printf("Primes is: %d\n", res.Result)
 	}
+}
+
+func doAvg(c pb.CalculatorServiceClient) {
+	log.Println("doAvg was invoked")
+
+	reqs := []int32{11, 52, 1, 82, 62, 101, 15}
+	//reqs := []*pb.AvgRequest{
+	//	{N: 22},
+	//	{N: 52},
+	//	{N: 101},
+	//}
+
+	stream, err := c.Avg(context.Background())
+	if err != nil {
+		log.Fatalf("Error while calling Avg %v\n", err)
+	}
+
+	for _, req := range reqs {
+		log.Printf("Sending: %v", req)
+		stream.Send(&pb.AvgRequest{N: req})
+		//stream.Send(req)
+	}
+
+	res, err := stream.CloseAndRecv()
+	if err != nil {
+		log.Fatalf("Error while receiving response from Avg %v", err)
+	}
+
+	log.Printf("Avg %f\n", res.Result)
+}
+
+func doMax(c pb.CalculatorServiceClient) {
+	log.Println("doMax was invoked")
+
+	stream, err := c.Max(context.Background())
+	if err != nil {
+		log.Fatalf("Error while creating stream %v", err)
+	}
+
+	waitC := make(chan struct{})
+
+	go func() {
+		reqs := []int32{1, 5, 7, 2, 99, 101, 11, 202, 500, 440, 60}
+
+		for _, req := range reqs {
+			log.Printf("Sending number %d", req)
+			stream.Send(&pb.MaxRequest{N: req})
+			time.Sleep(1 * time.Second)
+		}
+
+		stream.CloseSend()
+	}()
+
+	go func() {
+		for {
+			res, err := stream.Recv()
+			if err == io.EOF {
+				break
+			}
+
+			if err != nil {
+				log.Printf("Error while receiving %v", err)
+				break
+			}
+
+			log.Printf("Receiving new maximum %d\n", res.Result)
+		}
+
+		close(waitC)
+	}()
+
+	<-waitC
 }

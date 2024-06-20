@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
+	"io"
 	"log"
 	"time"
 )
@@ -55,4 +56,51 @@ func (s *Server) Primes(in *pb.PrimesRequest, stream pb.CalculatorService_Primes
 	}
 
 	return nil
+}
+
+func (s *Server) Avg(stream pb.CalculatorService_AvgServer) error {
+	log.Println("Avg function was invoked")
+
+	var sum int32 = 0
+	count := 0
+
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			return stream.SendAndClose(&pb.AvgResponse{Result: float32(sum) / float32(count)})
+		}
+
+		if err != nil {
+			log.Fatalf("Error while reading client stream %v\n", err)
+		}
+
+		sum += req.N
+		count += 1
+	}
+}
+
+func (s *Server) Max(stream pb.CalculatorService_MaxServer) error {
+	log.Println("Max function invoked")
+
+	var maximum int32 = 0
+
+	for {
+		req, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
+
+		if err != nil {
+			log.Fatalf("Error while reading client streaming %v", err)
+		}
+
+		if number := req.N; number > maximum {
+			maximum = number
+			err = stream.Send(&pb.MaxResponse{Result: maximum})
+			if err != nil {
+				log.Fatalf("Error while sending data to client %v", err)
+			}
+		}
+
+	}
 }

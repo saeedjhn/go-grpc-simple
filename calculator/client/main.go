@@ -21,5 +21,7 @@ func main() {
 	c := pb.NewCalculatorServiceClient(conn)
 	//doSum(c)
 	//doSub(c)
-	doPrimes(c)
+	//doPrimes(c)
+	//doAvg(c)
+	doMax(c)
 }
