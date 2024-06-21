@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
+	pb "github.com/saeedjhn/go-grpc/blog/goproto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
@@ -19,7 +19,7 @@ func main() {
 	log.Printf("Listening  on %s\n", addr)
 
 	s := grpc.NewServer()
-	pb.RegisterGreetServiceServer(s, &Server{})
+	pb.RegisterBlogServiceServer(s, &Server{})
 	reflection.Register(s)
 
 	if err = s.Serve(listen); err != nil {
