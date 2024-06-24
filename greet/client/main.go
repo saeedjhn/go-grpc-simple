@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const addr = ":50000"
+const addr = "0.0.0.0:50001"
 
 func main() {
 	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -20,9 +20,9 @@ func main() {
 	log.Printf("Connection is successful on %s\n", addr)
 
 	c := pb.NewGreetServiceClient(conn)
-	//doGreet(c)
-	//doGreetManyTimes(c)
-	//doLongGreet(c)
-	//doGreetEveryOnce(c)
+	doGreet(c)
+	doGreetManyTimes(c)
+	doLongGreet(c)
+	doGreetEveryOnce(c)
 	doGreetWithDeadline(c, 4*time.Second)
 }

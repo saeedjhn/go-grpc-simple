@@ -19,5 +19,20 @@ func main() {
 	log.Printf("Connection is successful on %s\n", addr)
 
 	c := pb.NewBlogServiceClient(conn)
-	doCreate(c)
+
+	b := &pb.Blog{
+		AuthorId: "1",
+		Title:    "This is my title",
+		Content:  "This is my content",
+	}
+
+	id := doCreate(c, b)
+	doCreate(c, b)
+	doCreate(c, b)
+
+	doRead(c, id)
+	doUpdate(c, id)
+	doRead(c, id)
+	doDelete(c, id)
+	doList(c)
 }

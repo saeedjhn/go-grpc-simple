@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-const addr = ":50001"
+const addr = "0.0.0.0:50001"
 
 func main() {
 	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -19,10 +19,10 @@ func main() {
 	log.Printf("Connection is successful on %s\n", addr)
 
 	c := pb.NewCalculatorServiceClient(conn)
-	//doSum(c)
-	//doSub(c)
-	//doPrimes(c)
-	//doAvg(c)
-	//doMax(c)
+	doSum(c)
+	doSub(c)
+	doPrimes(c)
+	doAvg(c)
+	doMax(c)
 	doSqrt(c, 10)
 }
