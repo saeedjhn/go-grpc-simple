@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"log"
 	"time"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func (s *Server) GreetManyTimes(in *pb.GreetRequest, stream pb.GreetService_GreetManyTimesServer) error {

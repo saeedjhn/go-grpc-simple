@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
+	"log"
+
 	"github.com/golang/protobuf/ptypes/empty"
 	pb "github.com/saeedjhn/go-grpc/blog/goproto"
-	"log"
 )
 
 func (s *Server) Delete(ctx context.Context, in *pb.BlogID) (*empty.Empty, error) {

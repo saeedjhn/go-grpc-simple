@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"io"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func (s *Server) LongGreet(stream pb.GreetService_LongGreetServer) error {

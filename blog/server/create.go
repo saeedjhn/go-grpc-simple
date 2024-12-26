@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
+	"log"
+
 	"github.com/google/uuid"
 	pb "github.com/saeedjhn/go-grpc/blog/goproto"
-	"log"
 )
 
 func (s *Server) Create(ctx context.Context, in *pb.Blog) (*pb.BlogID, error) {

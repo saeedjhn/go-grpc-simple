@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func doGreet(c pb.GreetServiceClient) {

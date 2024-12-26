@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
-	"google.golang.org/grpc/status"
 	"log"
 	"time"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
+	"google.golang.org/grpc/status"
 )
 
 func doGreetWithDeadline(c pb.GreetServiceClient, timeout time.Duration) {

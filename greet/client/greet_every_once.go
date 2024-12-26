@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"io"
 	"log"
 	"time"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func doGreetEveryOnce(c pb.GreetServiceClient) {

@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
+	"log"
+
 	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"google.golang.org/grpc/status"
-	"log"
 )
 
 func doSqrt(c pb.CalculatorServiceClient, n int32) {

@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"io"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func (s *Server) GreetEveryOnce(stream pb.GreetService_GreetEveryOnceServer) error {

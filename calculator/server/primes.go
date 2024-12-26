@@ -1,9 +1,10 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"log"
 	"time"
+
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 )
 
 func (s *Server) Primes(in *pb.PrimesRequest, stream pb.CalculatorService_PrimesServer) error {

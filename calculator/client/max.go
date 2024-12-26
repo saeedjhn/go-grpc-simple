@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"io"
 	"log"
 	"time"
+
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 )
 
 func doMax(c pb.CalculatorServiceClient) {

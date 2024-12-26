@@ -1,11 +1,12 @@
 package main
 
 import (
+	"log"
+	"time"
+
 	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
-	"time"
 )
 
 const addr = "0.0.0.0:50001"

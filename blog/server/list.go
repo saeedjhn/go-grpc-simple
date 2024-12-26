@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/golang/protobuf/ptypes/empty"
-	pb "github.com/saeedjhn/go-grpc/blog/goproto"
 	"log"
 	"time"
+
+	"github.com/golang/protobuf/ptypes/empty"
+	pb "github.com/saeedjhn/go-grpc/blog/goproto"
 )
 
 func (s *Server) List(in *empty.Empty, stream pb.BlogService_ListServer) error {

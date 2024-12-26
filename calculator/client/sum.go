@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 )
 
 func doSum(c pb.CalculatorServiceClient) {

@@ -1,9 +1,10 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"io"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 )
 
 func (s *Server) Avg(stream pb.CalculatorService_AvgServer) error {

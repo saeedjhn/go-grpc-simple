@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 )
 
 func (s *Server) Greet(ctx context.Context, in *pb.GreetRequest) (*pb.GreetResponse, error) {

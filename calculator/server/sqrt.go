@@ -3,11 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"math"
+
 	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"log"
-	"math"
 )
 
 func (s *Server) Sqrt(ctx context.Context, in *pb.SqrtRequest) (*pb.SqrtResponse, error) {

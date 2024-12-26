@@ -2,8 +2,9 @@ package main
 
 import (
 	"context"
-	pb "github.com/saeedjhn/go-grpc/blog/goproto"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/blog/goproto"
 )
 
 func doDelete(c pb.BlogServiceClient, id string) {

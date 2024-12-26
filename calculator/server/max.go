@@ -1,9 +1,10 @@
 package main
 
 import (
-	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 	"io"
 	"log"
+
+	pb "github.com/saeedjhn/go-grpc/calculator/goproto"
 )
 
 func (s *Server) Max(stream pb.CalculatorService_MaxServer) error {

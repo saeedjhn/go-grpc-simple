@@ -4,11 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
+	"time"
+
 	pb "github.com/saeedjhn/go-grpc/greet/goproto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"log"
-	"time"
 )
 
 func (s *Server) GreetWithDeadline(ctx context.Context, in *pb.GreetRequest) (*pb.GreetResponse, error) {
