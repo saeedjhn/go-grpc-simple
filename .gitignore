@@ -3,8 +3,6 @@
 
 # Binaries for programs and plugins
 bin/
-build/
-learn/
 *.exe
 *.exe~
 *.dll
@@ -14,8 +12,8 @@ learn/
 # Test binary, build with `go test -c`
 *.test
 
-# Logs
-logs/
+# Generate proto(s)
+**/goproto/
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
@@ -29,10 +27,6 @@ vendor/
 # Go workspace file
 go.work
 go.work.sum
-
-# Configuration
-development.yaml
-production.yaml
 
 ### GoLand ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
