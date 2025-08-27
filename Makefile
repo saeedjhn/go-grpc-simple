@@ -1,5 +1,6 @@
 BIN_DIR = bin
 PROTO_DIR = proto
+GO_PROTO_DIR = goproto
 SERVER_DIR = server
 CLIENT_DIR = client
 
@@ -52,9 +53,6 @@ $(project):
 	go build -o ${BIN_DIR}/$@/${SERVER_BIN} ./$@/${SERVER_DIR}
 	go build -o ${BIN_DIR}/$@/${CLIENT_BIN} ./$@/${CLIENT_DIR}
 
-test: all ## Launch tests
-	go test ./...
-
 clean: clean_greet clean_calculator clean_blog ## Clean generated files
 	${RM_F_CMD} ssl/*.crt
 	${RM_F_CMD} ssl/*.csr
@@ -63,13 +61,19 @@ clean: clean_greet clean_calculator clean_blog ## Clean generated files
 	${RM_RF_CMD} ${BIN_DIR}
 
 clean_greet: ## Clean generated files for greet
-	${RM_F_CMD} greet/${PROTO_DIR}/*.pb.go
+	#${RM_F_CMD} greet/${GO_PROTO_DIR}/*.pb.go
+	${RM_RF_CMD} greet/${GO_PROTO_DIR}
+	${RM_RF_CMD} bin/greet
 
 clean_calculator: ## Clean generated files for calculator
-	${RM_F_CMD} calculator/${PROTO_DIR}/*.pb.go
+	#${RM_F_CMD} calculator/${GO_PROTO_DIR}/*.pb.go
+	${RM_RF_CMD} calculator/${GO_PROTO_DIR}
+	${RM_RF_CMD} bin/calculator
 
 clean_blog: ## Clean generated files for blog
-	${RM_F_CMD} blog/${PROTO_DIR}/*.pb.go
+	#${RM_F_CMD} blog/${GO_PROTO_DIR}/*.pb.go
+	${RM_RF_CMD} blog/${GO_PROTO_DIR}
+	${RM_RF_CMD} bin/blog
 
 rebuild: clean all ## Rebuild the whole project
 
